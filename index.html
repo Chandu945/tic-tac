@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+        <div class="box" onclick="maintain(1)" id="1"></div>
+        <div class="box" onclick="maintain(2)" id="2"></div>
+        <div class="box" onclick="maintain(3)" id="3"></div>
+        <div class="box" onclick="maintain(4)" id="4"></div>
+        <div class="box" onclick="maintain(5)" id="5"></div>
+        <div class="box" onclick="maintain(6)" id="6"></div>
+        <div class="box" onclick="maintain(7)" id="7"></div>
+        <div class="box" onclick="maintain(8)" id="8"></div>
+        <div class="box" onclick="maintain(9)" id="9"></div>
+    </div>
+    <div id="player">
+        <div id="p1"><h1>Player1</h1></div>
+        <div id="p2"><h1>Player2</h1></div>
+    </div>
+    <span id="error"></span>
+    <h1 id="result"></h1>
+    <h1 id="restart"></h1>
+</body>
+<script>
+    let success = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+    let given = true
+    let err = false
+    let tie = true
+    let player1 = true
+    let arr1 = new Set()
+    let arr2 = new Set()
+    let set = new Set()
+    document.getElementById("p1").style.backgroundColor = "coral"
+    document.getElementById("p2").style.backgroundColor = "white"
+    function maintain(num) {
+        if (set.has(num)) {
+            document.getElementById("error").innerHTML += `<h2 id="clr">Select Other Box</h2>`
+            err = true
+        } else {
+            set.add(num)
+            if(player1){
+                document.getElementById(`${num}`).style.backgroundImage = `url('images.png')`
+                document.getElementById(`${num}`).style.backgroundSize = "100px 100px"
+                document.getElementById("p1").style.backgroundColor = "white"
+                document.getElementById("p2").style.backgroundColor = "coral"
+                player1 = false
+            }else{
+                document.getElementById(`${num}`).style.backgroundImage = `url('images (1).png')`
+                document.getElementById(`${num}`).style.backgroundSize = "100px 100px"
+                document.getElementById("p1").style.backgroundColor = "coral"
+                document.getElementById("p2").style.backgroundColor = "white"
+                player1 = true
+            }
+            if (given) {
+                arr1.add(num)
+                given = false
+                for(let i = 0 ; i < success.length ; i++){
+                    if(arr1.has(success[i][0]) && arr1.has(success[i][1]) && arr1.has(success[i][2])){
+                        console.log("player1 has won")
+                        document.getElementById("result").innerText+='Player1 has won'
+                        document.getElementById("restart").innerHTML+=`<a href="./index.html">RESTART GAME</a>`
+                        tie = false
+                        break
+                    }
+                }
+            } else {
+                arr2.add(num)
+                given = true
+                for(let i = 0 ; i < success.length ; i++){
+                    if(arr2.has(success[i][0]) && arr2.has(success[i][1]) && arr2.has(success[i][2])){
+                        console.log("player2 has won")
+                        document.getElementById("result").innerText+='Player2 has won'
+                        document.getElementById("restart").innerHTML+=`<a href="./index.html">RESTART GAME</a>`
+                        tie = false
+                        break
+                    }
+                }
+            }
+            
+            if (err) {
+                let main = document.getElementById("error")
+                let inner = document.getElementById("clr")
+                main.removeChild(inner)
+                err = false
+            }
+        }
+        if(set.size == 9 && tie){
+                    document.getElementById("result").innerText+='The Game is Tied '
+                    document.getElementById("restart").innerHTML+=`<a href="./index.html">RESTART GAME</a>`
+                }
+    }
+</script>
+
+</html>

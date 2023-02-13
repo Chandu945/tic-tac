@@ -1,0 +1,68 @@
+.box{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+#main{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    background-color: aliceblue;
+    margin: auto;
+    position: absolute;
+    left: 500px;
+}
+
+#player{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+#p1 ,#p2{
+    border: 1px solid black;
+    height: 80px;
+    width: 130px;
+    padding-left: 30px;
+}
+
+#clr{
+    border: 1px solid black;
+    max-width: fit-content;
+    margin: auto;
+    padding: 10px;
+    background-color: red;
+    color: azure;
+    position: absolute;
+    top: 350px;
+    left: 550px;
+}
+
+body{
+    background-image:url('https://cdn.htmlgames.com/TicTacToe/img/menu_back.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#result{
+    color: white;
+    position: absolute;
+    top : 400px;
+    left: 540px;
+    border: 1px solid black;
+    background-color: rgb(201, 83, 248);
+}
+
+#restart {
+    color: white;
+    position: absolute;
+    top : 480px;
+    left: 530px;
+    border: 1px solid black;
+    background-color: rgb(201, 83, 248);
+}
+
+a{
+    text-decoration: none;
+    color: white
+}
